@@ -32,6 +32,19 @@ provider:
         - dynamodb:PutItem
       Resource: "*"
 
+custom:
+  corsDefault:
+    origin:
+      - 'http://localhost:8017'
+    headers:
+      - MY_CUSTOM_HEADER
+      - Content-Type
+      - X-Amz-Date
+      - Authorization
+      - X-Api-Key
+      - X-Amz-Security-Token
+    allowCredentials: false
+
 functions:
   candidateSubmission:
     handler: api/candidates.submit
@@ -41,6 +54,7 @@ functions:
       - http:
           path: candidates/create
           method: post
+          cors: ${self:custom.corsDefault}
   
   listCandidates:
     handler: api/candidates.list
@@ -50,6 +64,7 @@ functions:
       - http:
           path: candidates/list
           method: get
+          cors: ${self:custom.corsDefault}
 
   candidateDetails:
     handler: api/candiates.getDetails
@@ -59,6 +74,7 @@ functions:
       - http:
           path: candidates/{id}
           method: get
+          cors: ${self:custom.corsDefault}
 
 resources:
   Resources:

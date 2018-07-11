@@ -85,6 +85,9 @@ module.exports.list = (event, context, callback) => {
 
       return callback(null, {
         statusCode: 200,
+        headers: {
+          "Access-Control-Allow-Origin": "http://localhost:8017"
+        },
         body: JSON.stringify({
           candidate: data.Items
         })
@@ -116,7 +119,7 @@ module.exports.getDetails = (event, context, callback) => {
       callback(null, response);
     })
     .catch(err => {
-      consosle.error(err);
+      console.error(err);
       callback(new Error("Couldn't fetch candidate."));
       return;
     });
