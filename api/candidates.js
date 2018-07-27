@@ -70,6 +70,7 @@ module.exports.submit = (event, context, callback) => {
  * List all candidates
  */
 module.exports.list = (event, context, callback) => {
+  console.log("Listing...");
   let params = {
     TableName: process.env.CANDIDATE_TABLE,
     ProjectionExpression: "id, fullname, emails"
